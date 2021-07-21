@@ -1,0 +1,12 @@
+/* Imagem do topo do site */
+.bgimage {
+	background-image: url("../images/panoramica1.jpg");
+	background-size: cover;
+	background-position: center;
+	height: 399px;
+}
+
+/*tamanho do tooltip link */
+.tootip-inner{
+	max-width: 350px;
+}

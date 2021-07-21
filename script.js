@@ -1,54 +1,101 @@
+// Função auxiliar ---------------------------------------------------------------
+function file_into_string( path ){
+	return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut aliquam sapien. Quisque eros tortor, bibendum et tempor eget, laoreet at risus. Suspendisse commodo massa orci, at ultricies tellus lobortis vel. Aliquam bibendum sagittis leo ac pellentesque. Duis gravida lorem et ligula pharetra, in eleifend diam euismod. Cras dolor odio, scelerisque iaculis ipsum a, accumsan porta dui. Etiam at nulla sodales, luctus arcu ut, pretium orci. Maecenas eleifend suscipit justo vel luctus. Sed vitae augue orci. Morbi ipsum quam, rhoncus ac laoreet non, dapibus id massa. Cras congue, risus eget sollicitudin iaculis, ipsum justo tristique odio, convallis placerat libero enim eget tellus. Nullam eu faucibus tellus.";
+}
 // Constructor Function ----------------------------------------------------------
 
-function Receita(nome, igredientes, preparo, foto ){
+function Culinaria ( nome, desc, foto ){
 	
-	this.igredientes = igredientes; 
-	this.preparo     = preparo; 
-	this.foto        = foto;
-	this.nome        = nome;
-	
-	// Atributo formatado --------------------------------------------------------
-	this.get_igredientes = function(){
-		
-		let s = "";
-		let igred_lst = igredientes.split(";"); 
-		
-		let count = 0;
-		for( let linha of igred_lst )
-			s += ++count + ". " + linha + "\n";
-		s += "\n-------------------------";
+	this.foto = foto;
+	this.nome = nome;
+	this.desc = file_into_string( desc );
 
-		return s
+	// Atributo formatado --------------------------------------------------------
+	
+	this.get_card = function(){
+		
+		let s = `
+		<div class = "card mb-4 border-primary">
+			<div class = "card-body">
+				<div class = "text-center">
+					<img src="${this.foto}" alt ="${this.nome}" width = 500 height = 400>
+					<h5 class ="card-title">${this.nome}</h5>
+				</div>
+				<p class="card-text text-justify">${this.desc}</p>
+				<button type="button" class="btn btn-outline-primary mr-auto">Restaurantes<button>
+				<button type="button" class="btn btn-outline-primary ml-auto">Receitas<button>
+			</div>
+		</div>
+		`;
+		return s;
 	}
 }
 
+let to_cularr = function( lst ){
+	let result = [];
+	for( let item of lst )
+		result.push( new Culinaria( item.nome, item.desc, item.foto ) );
+	return result.map( m => m.get_card() );
+}
+
+// Unindo os cards num unico container -------------------------------------------
+let merge_cards = function( card_array ){
+   
+	// ----------------------------------------------------------------------------
+	// dois cards por linha, se o numero de cards for impar, o card sobrando ficará
+	// sozinho em uma linha
+	// ----------------------------------------------------------------------------
+
+	let m = card_array.length;
+	let inner_div = "";
+	let card1 , card2;
+	for( let i = 0; i < Math.floor( m/2 ); i++ ){
+		
+		card1 = card_array[ 2*i ];
+		card2 = card_array[ 2*i + 1 ];
+
+		inner_div += `
+		<div class = "row px-2">
+			<div class = "col px-2">
+				${ "\t" + card1}
+				${ "\t" + card2}
+			</div>
+		</div>
+		`;
+	}if( m%2 === 1 ){
+		card1 = card_array[ -1 ];
+		inner_div += `
+		<div class = "row px-2">
+			<div class = "col px-2">
+				    ${ "\t" + card1}
+			</div>
+		</div>
+		`;
+	}
+
+	let result =`
+	<div class = "container" >
+		${"\t" + inner_div}
+	</div>
+	`;
+
+	return result;
+}
+	
 // Lista de objetos --------------------------------------------------------------
 
-let receita1 = { 
-	nome: "Borscht",
-	foto: "assets/borscht.jpg",
-	igredientes: "3 Beterrabas;1 folha de Louro;Meia Cabeça de repolho fatiada;1 Cebola grande;3 Cenouras;Meio Kg. de Carne de costela;3 dentes de alho;1 Nabo;Dill;Smetana",
-	preparo: "Limpe o excesso de gordura da carne de costela e fatie a banha resultante, guarde metade para fazer outras receitas. Açenda uma panela de pressão em fogo alto e quando ela estiver bem quente jogue a gordura. Ao passo que a gordura derrete pique a cebola em cubos médios, as cenouras em rodelas grosseiras e corte o nabo em dois. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nunc nisl, rhoncus nec nisl eget, volutpat pellentesque mauris. Duis condimentum pharetra interdum. Praesent lectus arcu, vehicula eget magna at, dictum accumsan mi. Vestibulum at ornare ligula, nec condimentum eros. Vestibulum ornare semper neque eu interdum. Duis leo lacus, tincidunt in porta ut, vehicula a dolor. Morbi tristique odio at orci tristique sodales. Vestibulum ut tempor leo. Sed sit amet ante vel ante auctor placerat ac in elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Desculpe professor se eu escrever a receita toda vai sair do foco do trabalho iso velit. Praesent nec scelerisque est. Donec id viverra risus."};
+let culinaria_arr = [
+	{nome:"Russia", foto:"assets/russia/thumbnail.png", desc:"assets/russia/Intro.txt"},
+	{nome:"Armênia", foto:"assets/armenia/thumbnail.png", desc:"assets/armenia/Intro.txt"},
+	{nome:"Hungria", foto:"assets/hungria/thumbnail.png", desc:"assets/hungria/Intro.txt"},
+	{nome:"Polônia", foto:"assets/polonia/thumbnail.png", desc:"assets/polonia/Intro.txt"}
+];
 
+let rec_arr = to_cularr( culinaria_arr );
+// for( let item of rec_arr )
+// 	console.log( item );
 
-let receita2 = { 
-	nome: "Tan apur",
-	foto: "assets/tan_apur.jpg",
-	igredientes: "350 ml de iogurte natural sem açucar;150ml de caldo de frango;1 ovo caipira;200 gramas de trigo em grão;salsinha, cebolinha e hortelã fatiado;bacon em cubinhos( opcional )",
-	preparo: "Recomendamos que você faça seu iogurte e, pricipalmente, seu caldo de frango em casa, o proprio site ja têm receita de ambos. Deixe o trigo de molho na noite anterior e o cozinhe por 15 minutos na panela de pressão no fogo médio Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet tortor vitae enim eleifend mattis. Etiam rutrum neque id dolor tristique tincidunt. Proin vel diam dui. Morbi lectus urna, varius quis metus id, dapibus vestibulum arcu. Nunc nec auctor mauris. Aliquam erat volutpat. Nullam auctor purus tortor, quis malesuada lorem sodales et. Sed dolor nunc, hendrerit quis ligula quis, pharetra auctor mi. Sed ornare et ante at sollicitudin. Proin vitae eleifend felis, nec malesuada lacus. Fusce sed ultricies diam. Aliquam neque tellus, faucibus ut luctus id, ullamcorper a eros. Morbi vulputate viverra purus, sit amet fringilla eros volutpat sed. "};
+const div = merge_cards( rec_arr );
+// console.log( div );
 
-let receita_arr = [ receita1 , receita2 ];
-
-// Função geradora de objetos Receita --------------------------------------------
-
-gera_receita = function( receita_seq ){
-	let objrec_seq = [];
-	for( let rec of receita_seq ){
-		let receita = new Receita( rec.nome, rec.igredientes, rec.preparo, rec.foto );
-		objrec_seq.push( receita );
-	}
-	return receita_seq;
-}
-
-
-
+$("body").append( div );

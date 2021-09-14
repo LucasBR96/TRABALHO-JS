@@ -1,20 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="assets/CSS/Bootstrap.css" rel = "stylesheet">
-	<link href="assets/CSS/all.css" rel = "stylesheet">
-	<link href="assets/CSS/styles.css" rel = "stylesheet">
-   <title>Curso Carlos Ribeiro</title>
-</head>
-<body>
-   <h2>Curso de Javascript</h2>
+<html lang="pt"> <!-- Idioma da página -->
 
-	<script src="assets/JS/jquery-3.3.1.js"></script>
-	<script src="assets/JS/popper.js"></script>
-	<script src="assets/JS/bootstrap.js"></script>
-   <script src="./script.js"></script>
+<head>
+	<meta charset="UTF-8"> <!-- MASTERS OF UNICODE! -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> 
+	<link href="assets/css/bootstrap.css" rel="stylesheet">
+	<link href="assets/css/all.css" rel="stylesheet">
+	<link href="assets/css/styles.css" rel="stylesheet">
+	<title>Bootstrap</title>
+</head>
+
+
+<body>
+
+
+	<div class = "container-fluid" style = "width: 80%;">
+		<!-- cabeçalho -->
+		<div class = "text-danger bg-white">
+
+			<!-- logo aqui -->
+			<div class = "row d-flex justify-content-center align-items-center" >
+				<h2 class = "m-0" > Babushka </h5>
+			</div>
+
+			<div class = "row d-flex justify-content-center align-items-center" >
+				<h5 class = "m-0" > Culinária do leste Europeu </h5>
+			</div>
+
+			<!-- opcões -->
+			<div class = "row my-1 text-danger d-flex justify-content-center align-items-center">
+				
+				<div class = "col-4 d-flex justify-content-center" >
+					<a style= "color: rgb(218, 41, 28); font-size: 16px" href = "/receitas/">
+						Receitas
+					</a>
+				</div>
+
+				<div class = "col-4 d-flex justify-content-center" >
+					<a style= "color: rgb(218, 41, 28); font-size: 16px" href = "#">
+						Restaurantes
+					</a>
+				</div>
+				
+				<div class = "col-4 d-flex justify-content-center" >
+					<a style= "color: rgb(218, 41, 28); font-size: 16px" href = "#">
+						Tours
+					</a>
+				</div>
+
+			</div>
+			
+			<!-- barra separadora-->
+			<div class = "mb-3" style = " padding: 3px ; background-color: rgb(0, 50, 160)"></div>
+		</div>
+
+		<div id = "center" >
+
+			<div class = "row" >
+
+				<div class= "col-md-2 col-12 text-danger mt-3 pl-4 pr-0">
+					<form id = "culFilter" action = "" method = "GET">
+						<select class = "form-select noshadow" name ="nome" 
+						style = "width:100%; text-align: center;
+								color:red ; background-color: white; border-color: white;">
+							<option class = "pais_opt" value = "">Todos</option>
+							<option class = "pais_opt" value = "1">Russia</option>
+							<option class = "pais_opt" value = "2">Armênia</option>
+							<option class = "pais_opt" value = "3">Polônia</option>
+							<option class = "pais_opt" value = "4">Hungria</option>
+						</select>
+					</form>
+				</div>
+
+				<div id = "receitas-cards" class = "col-md-10 col-12">
+				</div>
+			</div>
+		</div>
+
+		<!-- Rodapé -->
+		<div class = "text-white" style = "background-color: rgb( 0, 50, 160)">
+			<footer class = "py-3">        
+				<div class = "row d-flex align-items-center justify-content-center">
+					<div class = "col-4 d-flex justify-content-left" >
+						<ul class = "nav flex-column">
+							<li class ="nav-item mb-2">
+								<a class = "nav-link p-0 text-white" href = "#" >quem somos</a>
+							</li>
+							<li class ="nav-item mb-2">
+								<a class = "nav-link p-0 text-white" href = "#" >parceiros</a>
+							</li>
+							<li class ="nav-item mb-2">
+								<a class = "nav-link p-0 text-white" href = "#" >contribua</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class = "col-6 d-flex justify-content-center" >
+						<form>
+							<h5 class = "my-0"><strong> Nosso Newsettler</strong></h5>
+							<p>Receba novo conteúdo no seu e-mail</p>
+							<div class="d-flex gap-2">
+								<input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+								<button class="btn btn-white text-white" type="button">Subscribe</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="assets/js/jquery-3.3.1.js"></script>
+	<script src="assets/js/popper.js"></script>
+	<script src="assets/js/bootstrap.js"></script>
+	<script src="assets/js/script.js"></script>
+
 </body>
-</html>
